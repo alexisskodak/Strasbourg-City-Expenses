@@ -2,7 +2,7 @@
 
 ## Projet IPython visant à rendre les données publiées sur [Data Gouv](https://www.data.gouv.fr/fr/datasets/achats-des-principales-communes-francaises-en-2019/) lisibles facilement. Cas pratique: achats de la commune de Strasbourg en 2019
 
-## Organisation en 3 axes Principaux
+## Organisation en 3 axes principaux
 
 1. ****Mise en place d'un environnement virtuel Python**** grace à ****Anaconda**** comportant les libraires et modules adéquats pour le ****traitement, nettoyage et la représentation visuelle**** des données
 
