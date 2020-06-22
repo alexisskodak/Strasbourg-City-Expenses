@@ -9,5 +9,5 @@
 2. ****Création des objets Pandas DataFrame****.
 Nettoyage des files portant des cases majoritairement vides. _groupby_ et ajout de colonnes et d'autres éléments supplémentaires pour avoir une meilleure table plus facilement exploitable.
 
-1. ****Représentation visuelle**** avec des graphiques traditionnels grace aux outils ****Matplotlib****
+3. ****Représentation visuelle**** avec des graphiques traditionnels grace aux outils ****Matplotlib****
     
