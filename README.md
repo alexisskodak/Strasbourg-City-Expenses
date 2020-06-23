@@ -32,11 +32,11 @@
         $ conda create --name nom_environnement
         $ conda activate nom_environnement
         ```
-  - Installation des paquets nécessaires
+  - Installation des librairies nécessaires
     - ```
         $ conda install pandas matplotlib 
         ```
-        (Selon la distribution conda choisie, ces paquets peuvent etre installées par défaut)
+        (Selon la distribution conda choisie, ces librairies peuvent etre installées par défaut)
 
   - Optionnel: installation de **Jupyter Notebooks**.
   On choisit Jupyter Notebooks pour sa facilité d'utilisation et pour l'aspect interactif ou éxécution par blocs de code.
@@ -52,7 +52,7 @@
 
 Pour faciliter la démarche, il convient de télécharger le fichier avec les données sous format .csv et de les sauvegarder dans le meme dossier ou on a crée notre fichier de code source.
 
-- importation des paquets
+- importation des librairies
 ```Python
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -79,6 +79,63 @@ Les colonnes correspondent respectivement:
 - à la date de réception de facture ou de commande (à vérifier)
 - au montant de la commande
 - au nom du prestataire de services
+
+
+## 2.1 Opérations sur les données en fonction des mois
+
+On crée tout d'abord une colonne pour le mois, pour pouvoir représenter graphiquement les achats de la commune par mois
+
+```Python
+# Prendre le mois dans la colonne 'DATE' en format 'int'
+sxb['MOIS'] = sxb['NOTIFICATION_DATE'].str[5:7].astype(int)
+
+# Convertir le type des cases 'MONTANT' en 'float' lorsque possible
+sxb['MONTANT'] = pd.to_numeric(sxb['MONTANT'],errors='coerce')
+```
+Manipulations sur cette nouvelle colonne
+
+```Python
+# Groupement de la table par mois
+depenses_par_mois = sxb.groupby('MOIS').sum()
+
+# création d'une colonne pour représenter la fraction du montant total
+depenses_par_mois['MONTANT RELATIF'] = depenses_par_mois['MONTANT'] * 100 / total2019
+
+# mettre en indice la colonne relative au mois
+depenses_par_mois = depenses_par_mois.reset_index()
+
+# calculer les pourcentages des montants
+pourcentages = depenses_par_mois['MONTANT RELATIF']
+
+Mois =  ['Janvier', 'Fevrier', 'Mars', 
+         'Avril', 'Mai', 'Juin', 
+         'Juillet', 'Aout', 'Septembre', 
+         'Octobre', 'Novembre', 'Decembre']
+```
+
+## 2.2 Opérations sur les données en fonction des entreprises
+
+```Python
+# seuil arbitraire en dessous duquel nous ne voulons pas traiter
+seuil = 400000.0
+
+# transformer en minuscules 
+sxb['TITULAIRES_DENOMINATION'] = sxb['TITULAIRES_DENOMINATION'].str.lower()
+
+# Regroupement par entreprise
+depenses_par_prestataire = sxb.groupby('TITULAIRES_DENOMINATION').sum()
+
+# application du seuil pour filtrer les petits achats
+top_depenses_par_prestataire = depenses_par_prestataire[depenses_par_prestataire['MONTANT'] > seuil]
+top_depenses_par_prestataire = top_depenses_par_prestataire.reset_index()
+
+# creation d'une liste ayant comme elements les entreprises
+prestataires = top_depenses_par_prestataire['TITULAIRES_DENOMINATION']
+
+# une autre liste avec les montants correspondants
+montant = top_depenses_par_prestataire['MONTANT']
+```
+
 
 
 
