@@ -4,10 +4,15 @@
 
 ## Organisation en 3 axes principaux
 
-1. ****Mise en place d'un environnement virtuel Python**** grace à ****Anaconda**** comportant les libraires et modules adéquats pour le ****traitement, nettoyage et la représentation visuelle**** des données
+1. ### ****Mise en place d'un environnement virtuel Python**** 
+   - On choisit pour ce propos un environemment ****Anaconda**** comportant les libraires et modules adéquats pour le ****traitement, nettoyage et la représentation visuelle**** des données
 
-2. ****Création des objets Pandas DataFrame****.
-Nettoyage des files portant des cases majoritairement vides. _groupby_ et ajout de colonnes et d'autres éléments supplémentaires pour avoir une meilleure table plus facilement exploitable.
+2. ### Traitement des données
+   - Création des objets ****Pandas DataFrame****.
+   - Nettoyage des files portant des cases majoritairement vides.
+   - Groupement par colonnes ou _'groupby'_
+   - ajout de colonnes et d'autres éléments supplémentaires pour avoir une table plus facilement exploitable.
 
-3. ****Représentation visuelle**** avec des graphiques traditionnels grace aux outils ****Matplotlib****
+3. ### ****Représentation visuelle****
+   - avec des graphiques traditionnels grace aux outils ****Matplotlib****
     
