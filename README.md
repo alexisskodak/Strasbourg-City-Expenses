@@ -52,5 +52,35 @@
 
 Pour faciliter la démarche, il convient de télécharger le fichier avec les données sous format .csv et de les sauvegarder dans le meme dossier ou on a crée notre fichier de code source.
 
+- importation des paquets
+```Python
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+- Creation de notre objet DataFrame principal
+  
+```Python
+sxb = pd.read_csv('sxb.csv', sep=';')
+
+# Supprimer les files ou toutes les cases sont vides
+sxb.dropna(how='all', inplace=True) 
+
+# Visualiser les 10 premières files de la table
+sxb.head(10)
+```
+Nous observons une table de la forme suivante
+
+![image](sxbhead.png)
+
+Les colonnes correspondent respectivement:
+- au numero de la transaction
+- au nom du client (dans ce cas la commune de Strasbourg)
+- à l'objet de la transaction
+- à la date de réception de facture ou de commande (à vérifier)
+- au montant de la commande
+- au nom du prestataire de services
+
+
+
 
     
