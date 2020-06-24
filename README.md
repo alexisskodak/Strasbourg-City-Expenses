@@ -71,9 +71,9 @@ Nous observons une table de la forme suivante
  
 ![image](sxbhead.png)
  
-## 2.1 Opérations sur les données en fonction des mois
+## 2.1 Opérations sur les données en fonction du mois
  
-### 2.1.1 On crée tout d'abord une colonne pour le mois, pour pouvoir représenter graphiquement les achats de la commune par mois
+### 2.1.1 On crée tout d'abord une colonne pour le mois
  
 ```Python
 # Prendre le mois dans la colonne 'DATE' en format 'int'
