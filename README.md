@@ -5,7 +5,7 @@
 ## Organisation en 3 axes principaux:
  
 1. ### Mise en place d'un ****environnement virtuel Python****
-  - On choisit pour ce propos un environnement ****Anaconda**** comportant les libraires et modules adéquats pour le ****traitement, nettoyage et la représentation visuelle**** des données
+  - On choisit pour ce propos un environnement ****Anaconda**** comportant les bibliothèques et modules adéquats pour le ****traitement, nettoyage et la représentation visuelle**** des données
  
 2. ### Traitement des données
   - Création des objets ****Pandas DataFrame****.
@@ -27,21 +27,21 @@
 - Installation [Anaconda](https://www.anaconda.com/products/individual). Guide d'installation figure dans le site ci contre
  
 - Une fois Anaconda installé:
- - Sous système type UNIX, ouvrir un terminal et saisir:
+ - Dans un interpreteur de commandes bash ou similaire, saisir:
    - ```
-       $ conda create --name nom_environnement
-       $ conda activate nom_environnement
+       conda create --name nom_environnement
+       conda activate nom_environnement
        ```
- - Installation des librairies nécessaires
+ - Installation des bibliothèques nécessaires
    - ```
-       $ conda install pandas matplotlib
+       conda install pandas matplotlib
        ```
-       (Selon la distribution conda choisie, ces librairies peuvent être installées par défaut)
+       (Selon la distribution conda choisie, ces bibliothèques peuvent être installées par défaut)
  
  - Optionnel: installation de **Jupyter Notebooks**.
  On choisit Jupyter Notebooks pour sa facilité d'utilisation et pour l'aspect interactif ou exécution par blocs de code.
    - ```
-       $ conda install -c conda-forge jupyterlab
+       conda install -c conda-forge jupyterlab
        ```
  
 ### Une fois notre environnement créé et activé, ouvrir un Notebook Jupyter ou un éditeur de texte a choix
@@ -52,7 +52,7 @@
  
 Pour faciliter la démarche, il convient de télécharger le fichier avec les données sous format .csv et de les sauvegarder dans le même dossier ou on a créé notre fichier _.ipynb_.
  
-- Importation des librairies
+- Importation des bibliothèques
 ```Python
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -164,7 +164,7 @@ top_depenses_par_projet = depenses_par_projet[depenses_par_projet['MONTANT'] > s
 ### Les données trouvées sur Open Data sont facilement traitables et bien classifiées, le nettoyage a faire est minime et les visualisations semblent satisfaisantes car répondent parfaitement aux attentes
  
 Limites de cette étude:
-- On a choisit de représenter les données qui nous sont fournies sans forcément les interpréter, en effet, une approche plus rigoureuse en terme de statistiques est requise pour cela.
+- On a choisit de représenter les données qui nous sont fournies sans forcément les interpréter, en effet, il faudrait un investissement plus important sur le temps accordé à la partie statistique.
 - La manière dont ces données ont été saisies, nous limite en terme de possibilités de traitement. Parmi des améliorations possibles on peut citer, une colonne qui catégorise par domaine d'activité les achats de la commune.
 - De même, un fichier identique pour plusieurs années pourrait vraiment donner de l'ampleur à une analyse comme celle effectuée ci dessus, sans forcément déployer de moyens plus sophistiqués.
 
