@@ -168,20 +168,20 @@ top_depenses_par_projet = depenses_par_projet[depenses_par_projet['MONTANT'] > s
 
 ![image](depenses_mois.png) ![image](depenses_mois_relatif.png)
 
-### On constate qu'un tiers des achats de la commune ont ete effectues au mois d'Octobre
+### On constate qu'un tiers des achats de la commune ont été effectués au mois d'Octobre
 
 Interpretation possible:
 
-- La commune prepare la ville pour le fetes de fin dannee, notamment dans le cadre '_Strasbourg Capitale De Noel_'
+- La commune prépare la ville pour le fêtes de fin d'année, notamment dans le cadre 'Strasbourg Capitale De Noel'
 
-Pour verifier cette hypothese, nous alons rassembler tous les achats qui ont ete effectues par la commune pendant le mois d'Octobre. Ensuite, nous allons identifier des tendances pour essayer de deduire le motif de chaque achat. Etant donne que nous n'avons pas de colonne qui nous precise cela, on va se baser entierement sur la colonne '[MARCHE_OBJET]
+Pour vérifier cette hypothèse, nous allons rassembler tous les achats qui ont été effectués par la commune pendant le mois d'Octobre. Ensuite, nous allons identifier des tendances pour essayer de déduire le motif de chaque achat. Etant donné que nous n'avons pas de colonne qui nous précise cela, on va se baser entièrement sur la colonne '[MARCHE_OBJET]
 
 ```python
 achats_octobre = sxb.loc[(sxb['MOIS'] == 10)]
 projets_octobre = [projet for projet in sxb['MARCHE_OBJET']]
 
-# Convertir une liste de mots en une seule chaine de caracteres
-# en precisant un separateur
+# Convertir une liste de mots en une seule chaîne de caractères
+# en précisant un séparateur
 def joindre_mots(liste, separateur):
    string_final = separateur.join(liste)
    return string_final
@@ -189,7 +189,7 @@ def joindre_mots(liste, separateur):
 projets_str = joindre_mots(projets_octobre, ' ')
 ```
 
-Grace a des expressions regulieres on pourra se debarasser des caracteres polluants
+Grâce à des expressions régulières on pourra se débarrasser des caracteres polluants
 
 ```python
 import re
@@ -198,7 +198,7 @@ sans_symboles = re.sub('[0-9]|\'|\.|\-|\/|\,|\:|\(|\)', '', projets_str)
 split_line = sans_symboles.split()
 ```
 
-Nous allons egalement supprimer des mots qui nous donnent pas d'informations specialement utiles (par exemple les articles, prepositions....)
+Nous allons également supprimer des mots qui nous donnent pas d'informations spécialement utiles (par exemple les articles, prépositions....)
 
 ```python
 articles = ['LE', 'A', 'LA', 'LES', 
@@ -211,24 +211,24 @@ articles = ['LE', 'A', 'LA', 'LES',
 
 sans_articles = [word for word in split_line if word not in articles]
 
-# On cree une nouvelle liste avec les mots en miniscules
+# On crée une nouvelle liste avec les mots en minuscules
 en_minuscules = []
 for mot in new_words:
     mot = mot.lower()
     en_minuscules += [mot]
 ```
 
-on va ensuite representer la frequence de chaque mot grace a la bibliotheque WordCloud
+on va ensuite representar la fréquence de chaque mot grace a la bibliotheque WordCloud
 
 ```python
 from wordcloud import WordCloud
 
-# On transforme a nouveau en une seule chaine de caracteres
-# car c'est le type du parametre admis par la methode 'generate' de WordCloud
-mots_du_nuage = joindre_mots(minuscules, ' ')
+# On transforme à nouveau en une seule chaîne de caractères
+# car c'est le type du parametre admis par la méthode ‘generate’ de WordCloud
+mots_du_nuage = joindre mots(minuscules, ' ')
 nuage_mot = WordCloud(width=800, height=800, background_color ='white', min_font_size = 10).generate(mots_du_nuage)
 
-# Quelques reglagles matplotlib pour finaliser
+# Quelques réglages matplotlib pour finaliser
 plt.figure(figsize = (10, 10), facecolor = None) 
 plt.imshow(nuage_mot) 
 plt.axis("off") 
@@ -237,9 +237,10 @@ plt.tight_layout(pad = 0)
 plt.show() 
 ```
 
-Voila ce que l'on obtient
+Voilà ce que l'on obtient
 
-![image](/home/alexis/Desktop/IPython/AchatsStrasbourg/nuages.png)
+![image](nuages.png)
+
 
 Les resultats sont tres interessants cependant plutot decevants par rapport a notre interpretation. En effet on voit que la plupart des achats de la commune pendant le mois d'octobre, concernent le gros oeuvre et BTP, eclairage publique, renovation d'ecoles... On voit a peine et en tres petit les mots 'sapin', 'fetes', 'festivites', 'noel'.
 
