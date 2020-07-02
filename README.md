@@ -73,16 +73,6 @@ Pour faciliter la démarche, il convient de télécharger le fichier avec les do
   ```Python
   sxb = pd.read_csv('sxb.csv', sep=';')
   ```
-
-# Supprimer les files ou toutes les cases sont vides
-
-sxb.dropna(how='all', inplace=True)
-
-# Visualiser les 10 premières files de la table
-
-sxb.head(10)
-
-```
 Nous observons une table de la forme suivante
 
 ![image](sxbhead.png)
@@ -119,26 +109,6 @@ pourcentages = depenses_par_mois['MONTANT RELATIF']
 # seuil arbitraire en dessous duquel nous ne traiterons pas
 seuil = 400000.0
 ```
-
-### Transformer en minuscules
-
-```Python
-sxb['TITULAIRES_DENOMINATION'] = sxb['TITULAIRES_DENOMINATION'].str.lower()
-```
-
-### Regroupement par entreprise
-
-```Python
-depenses_par_prestataire = sxb.groupby('TITULAIRES_DENOMINATION').sum()
-```
-
-### Application du seuil pour filtrer les petits achats
-
-```Python
-top_depenses_par_prestataire = depenses_par_prestataire[depenses_par_prestataire['MONTANT'] > seuil]
-top_depenses_par_prestataire = top_depenses_par_prestataire.reset_index()
-```
-
 ## 2.3 Opérations sur les données en fonction des achats individuels
 
 ### Convertir en minuscules les cases portant l'objet de l'achat
@@ -166,15 +136,15 @@ top_depenses_par_projet = depenses_par_projet[depenses_par_projet['MONTANT'] > s
 
 ## Achats de la commune par mois
 
-![image](depenses_mois.png) ![image](depenses_mois_relatif.png)
+![image](depenses_mois.png)![image](depenses_mois_relatif.png)
 
-### On constate qu'un tiers des achats de la commune ont été effectués au mois d'Octobre
+### On constate qu'un tiers du total des achats de la commune en 2019 ont été effectués pendant le mois d'Octobre
 
 Interpretation possible:
 
-- La commune prépare la ville pour le fêtes de fin d'année, notamment dans le cadre 'Strasbourg Capitale De Noel'
+- La commune aménage la ville pour le fêtes de fin d'année, notamment dans le cadre 'Strasbourg Capitale De Noel'
 
-Pour vérifier cette hypothèse, nous allons rassembler tous les achats qui ont été effectués par la commune pendant le mois d'Octobre. Ensuite, nous allons identifier des tendances pour essayer de déduire le motif de chaque achat. Etant donné que nous n'avons pas de colonne qui nous précise cela, on va se baser entièrement sur la colonne '[MARCHE_OBJET]
+Pour vérifier cette hypothèse, nous allons rassembler tous les achats qui ont été effectués par la commune pendant le mois d'Octobre. Ensuite, nous allons identifier des tendances pour essayer de déduire le motif de chaque achat, le descriptif saisi par defaut étant long et vague.
 
 ```python
 achats_octobre = sxb.loc[(sxb['MOIS'] == 10)]
@@ -218,7 +188,7 @@ for mot in new_words:
     en_minuscules += [mot]
 ```
 
-on va ensuite representar la fréquence de chaque mot grace a la bibliotheque WordCloud
+on va ensuite représenter la fréquence de chaque mot grace a la bibliothèque WordCloud
 
 ```python
 from wordcloud import WordCloud
@@ -242,15 +212,16 @@ Voilà ce que l'on obtient
 ![image](nuages.png)
 
 
-Les resultats sont tres interessants cependant plutot decevants par rapport a notre interpretation. En effet on voit que la plupart des achats de la commune pendant le mois d'octobre, concernent le gros oeuvre et BTP, eclairage publique, renovation d'ecoles... On voit a peine et en tres petit les mots 'sapin', 'fetes', 'festivites', 'noel'.
+Les résultats sont très intéressants, cependant plutôt décevants par rapport à notre interprétation. En effet on voit que la plupart des achats de la commune pendant le mois d'Octobre, concernent principalement le BTP, l'éclairage public, rénovation d'écoles... On voit à peine et en très petit les mots 'sapin', 'fêtes', 'festivités', 'noel'.
 
-Possibles hypotheses:
+Explications possibles:
 
-- C'est la CUS et/ou la Region Grand Est et non pas la commune qui gere ces achats
+- C'est la CUS et/ou la Région Grand Est et non pas la commune qui gère ces achats
 
-- Les depenses publiques pour l'amenagement de la ville pour les festivites son beaucoup plus faibles de ce que l'on estimait
+- Les dépenses publiques pour l'aménagement de la ville pour les festivités sont beaucoup plus faibles de ce que l'on estimait
 
-Quand à la question du pic d'achats au mois d'Octobre, nous n'avons pas les moyens d'en tirer une interpretation valable depuis les donnees exploitees.
+Quand à la question du pic d'achats au mois d'Octobre, nous n'avons pas les moyens d'en tirer une interprétation valable depuis les données exploitées dans le cadre de cette étude.
+
 
 ## Achats de la commune par entreprise
 
